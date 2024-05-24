@@ -29,14 +29,22 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
 app.UseStaticFiles();
-
 app.UseHttpsRedirection();
 
 
-app.UseCors("CorsPolicy");
 
+if (app.Environment.IsDevelopment())
+{
+    app.UseCors(x =>
+        x.AllowAnyOrigin()
+        .AllowAnyOrigin()
+        .AllowAnyMethod());
+}
+else
+{
+    app.UseCors("CorsPolicy");
+}
 
 app.UseAuthorization();
 
